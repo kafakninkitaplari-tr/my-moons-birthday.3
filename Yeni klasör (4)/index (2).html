@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi ki Doğdun Sevgilim! ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: url('arkaplan.jpg') no-repeat center center fixed; 
+            background-size: cover;
+            background-color: #fff0f3; 
+            color: #444; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
+
+        .page { display: none; text-align: center; width: 100%; max-width: 1000px; animation: fadeIn 0.5s ease-in; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        h1 { color: #ff4d6d; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8); }
+        
+        .btn { display: inline-block; padding: 15px 30px; background: #ff4d6d; color: white; text-decoration: none; border-radius: 50px; cursor: pointer; border: none; font-weight: bold; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; z-index: 10; position: relative;}
+        .btn:hover { background: #c9184a; transform: scale(1.05); }
+        
+        .gift-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .gift-box { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); cursor: pointer; width: 220px; transition: 0.3s; text-align: center; }
+        .gift-box:hover { transform: translateY(-10px); background: #fff; border: 2px solid #ff4d6d; }
+        
+        .gift-box img.icon { width: 90px; height: 90px; object-fit: contain; margin-bottom: 15px; }
+        .gift-box p { font-weight: 600; color: #ff4d6d; font-size: 1.2rem; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin: 30px 0; }
+        .polaroid { background: white; padding: 10px 10px 15px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transform: rotate(-2deg); transition: 0.3s; }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+        .polaroid img { width: 100%; height: 180px; object-fit: cover; }
+
+        /* CD TASARIMI VE HAREKETİ */
+        .cd-player-container {
+            position: relative;
+            width: 400px; /* CD'nin Görüneceği Genişlik (Büyütüldü) */
+            height: 400px; /* CD'nin Görüneceği Yükseklik (Büyütüldü) */
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #spinningCd {
+            width: 100%;
+            height: 100%;
+            background: url('image_0.png') no-repeat center center;
+            background-size: contain;
+            border-radius: 50%; /* Yuvarlak olması için */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            
+            /* DÖNME ANİMASYONU TANIMI */
+            animation: rotate-cd 5s linear infinite;
+            animation-play-state: paused; /* Başlangıçta dursun */
+        }
+
+        /* CD'nin ortasındaki deliği şeffaf yapmak için (isteğe bağlı, görselde delik varsa gerek yok) */
+        /* #spinningCd::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #fff0f3; 
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        } */
+
+        /* Dönme Animasyonu */
+        @keyframes rotate-cd {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Müzik çalarken class eklenince dönecek */
+        .playing #spinningCd {
+            animation-play-state: running;
+        }
+
+        .letter { background: #fffdf9; padding: 50px; border-radius: 15px; font-family: 'Poppins', sans-serif; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 750px; margin: 0 auto; line-height: 1.8; border-left: 10px solid #ff4d6d; }
+        .letter h2 { font-family: 'Dancing Script', cursive; color: #ff4d6d; margin-bottom: 25px; font-size: 2.5rem; text-align: center; }
+        .letter p { font-size: 1.1rem; color: #444; white-space: pre-line; text-align: justify; }
+
+        audio { margin-top: 10px; width: 100%; max-width: 400px; }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page active">
+        <h1>Doğum Günün Kutlu Olsun Aşkım ❤️</h1>
+        <button class="btn" onclick="showPage('page2')">Sürprizi Aç</button>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>Sana Özel Bir Yolculuk 🎁</h1>
+        <div class="gift-container">
+            <div class="gift-box" onclick="showPage('page-fotos')">
+                <img src="ikon_ani.png" class="icon" alt="Anılar">
+                <p>Anılarımız</p>
+            </div>
+            <div class="gift-box" onclick="showPage('page-music')">
+                <img src="ikon_sarki.png" class="icon" alt="Şarkı">
+                <p>Şarkımız</p>
+            </div>
+            <div class="gift-box" onclick="showPage('page-mektup')">
+                <img src="ikon_not.png" class="icon" alt="Not">
+                <p>Mesajım</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-fotos" class="page">
+        <h1>Anılarımız 📸</h1>
+        <div class="gallery-grid">
+            <div class="polaroid"><img src="foto1.jpg"></div>
+            <div class="polaroid"><img src="foto2.jpg"></div>
+            <div class="polaroid"><img src="foto3.jpg"></div>
+            <div class="polaroid"><img src="foto4.jpg"></div>
+            <div class="polaroid"><img src="foto5.jpg"></div>
+            <div class="polaroid"><img src="foto6.jpg"></div>
+            <div class="polaroid"><img src="foto7.jpg"></div>
+            <div class="polaroid"><img src="foto8.jpg"></div>
+            <div class="polaroid"><img src="foto9.jpg"></div>
+            <div class="polaroid"><img src="foto10.jpg"></div>
+            <div class="polaroid"><img src="foto11.jpg"></div>
+            <div class="polaroid"><img src="foto12.jpg"></div>
+            <div class="polaroid"><img src="foto13.jpg"></div>
+            <div class="polaroid"><img src="foto14.jpg"></div>
+            <div class="polaroid"><img src="foto15.jpg"></div>
+            <div class="polaroid"><img src="foto16.jpg"></div>
+            <div class="polaroid"><img src="foto17.jpg"></div>
+            <div class="polaroid"><img src="foto18.jpg"></div>
+            <div class="polaroid"><img src="foto19.jpg"></div>
+            <div class="polaroid"><img src="foto20.jpg"></div>
+        </div>
+        <button class="btn" onclick="showPage('page2')">Geri Dön</button>
+    </div>
+
+    <div id="page-music" class="page">
+        <h1>Bizim Şarkımız 🎵</h1>
+        
+        <div id="cdPlayer" class="cd-player-container">
+            <div id="spinningCd"></div>
+        </div>
+
+        <audio id="myAudio" controls onplay="startCd()" onpause="stopCd()">
+            <source src="bizimsarkimiz.mp3" type="audio/mpeg">
+        </audio>
+        <br><button class="btn" onclick="showPage('page2')">Geri Dön</button>
+    </div>
+
+    <div id="page-mektup" class="page">
+        <div class="letter">
+            <h2>Gökyüzümün En Berrak Işığına 💌</h2>
+            <p>Canım sevgilim,
+
+Sen benim hayatımın siyah atlasında parlayan o eşsiz Ay’sın. Varlığının üzerimdeki etkisi öylesine şeffaf, öylesine pürüzsüz ki; senin o saf ışığın karşısında tüm dünya sessizliğe bürünüyor. Yıllarca sessiz ve durgun olan kalbim, senin varlığını her duyumsadığında ilk kez yabancısı olduğu muazzam bir doluluğa ulaşıyor.
+
+En çok da şunu bilmeni istiyorum: Ruhumun en karanlık, en kuytu dehlizleri bile ilk defa senin ışığınla, senin neşenle yankılanıyor. Eskiden o dehlizlerde sadece yankısı duyulan boşluk, şimdi senin varlığının sıcaklığıyla dolup taşıyor. Seni sevmek, Güneş’in Ay’a olan o kadim sevdası gibi; sen parladıkça ben aydınlanıyorum, sen varsan ben var oluyorum.
+
+Kalbim ilk defa bu kadar dolu ve bu doluluk, seninle tamamlanmanın verdiği o eşsiz huzuru taşıyor. Sen benim karanlığımı dağıtan, gecemi gündüze çeviren, ruhumun en derinlerine sızan tek gerçeğimsin. Kelimelerin ötesinde bir bağla, o sonsuz gökyüzünde hep senin izindeyim.
+
+İyi ki doğdun, iyi ki benim gökyüzüme doğup o en derin dehlizlerimi bile aydınlattın.
+
+Seni her şeyden çok seviyorum.</p>
+        </div>
+        <button class="btn" onclick="showPage('page2')">Geri Dön</button>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            const audio = document.getElementById('myAudio');
+            if(pageId !== 'page-music') { 
+                audio.pause(); 
+                stopCd(); // Sayfa değişirse CD'yi durdur
+            }
+        }
+
+        // CD'yi Döndürme Fonksiyonları
+        function startCd() {
+            document.getElementById('cdPlayer').classList.add('playing');
+        }
+
+        function stopCd() {
+            document.getElementById('cdPlayer').classList.remove('playing');
+        }
+    </script>
+</body>
+</html>
